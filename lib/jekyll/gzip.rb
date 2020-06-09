@@ -22,7 +22,7 @@ end
 begin
   require 'jekyll-assets'
 
-  Jekyll::Assets::Hook.register :env, :after_write do |env|
+  Jekyll::Hooks.register :env, :post_write do |env|
     if Jekyll.env == 'production'
       path = Pathname.new("#{env.jekyll.config['destination']}#{env.prefix_url}")
       Jekyll::Gzip::Compressor.compress_directory(path, env.jekyll)
